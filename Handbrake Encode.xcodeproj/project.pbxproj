@@ -194,7 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/amlint \"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"";
+			shellScript = "\"${DEVELOPER_BIN_DIR}/amlint\" \"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
