@@ -29,7 +29,7 @@ my @handbrakePresets = ('Universal',
 my @deinterlaceOptions = ( 'fast', 'slow', 'slower' );
 
 my $cmd="/Applications/HandBrakeCLI";
-my $handbrakePresetIndex = $ENV{'handbrakePreset'} + 0;
+my $handbrakePresetIndex = $ENV{'preset'} + 0;
 my $removeOriginal = $ENV{'removeOriginal'} + 0;
 my $container = $ENV{'container'} + 0;
 my $quality = $ENV{'quality'} + 0;
@@ -53,7 +53,7 @@ if( $deinterlace ) {
 	$deinterlaceOption = "--deinterlace='$deinterlaceOption'";
 }
 
-my $handbrakePreset = $handbrakePresets[$handbrakePresetIndex];
+my $preset = $handbrakePresets[$handbrakePresetIndex];
 
 my @files = (<>);
 
@@ -78,7 +78,7 @@ foreach my $filePath (@files) {
 		
 	my ($fh, $tempfile) = tempfile( SUFFIX => ".$suffix" );
 
-	# "$cmd" -i "$filePath" --preset="$handbrakePreset" -o "$tempfile > /dev/console";
+	# "$cmd" -i "$filePath" --preset="$preset" -o "$tempfile > /dev/console";
 	my $removeCMD = "osascript -e 'tell app \"Finder\" to delete POSIX file \"$filePath\"'";
 	
 	# determine audio tracks
@@ -94,7 +94,7 @@ foreach my $filePath (@files) {
 		$previousLine = $line;
 	}
 
-	my $encodeCMD = "$cmd -i '$filePath' $deinterlaceOption $qualityOption $audioParam --preset='$handbrakePreset' -o '$tempfile'";
+	my $encodeCMD = "$cmd -i '$filePath' $deinterlaceOption $qualityOption $audioParam --preset='$preset' -o '$tempfile'";
 
 	if( $removeOriginal ) {
 		system($encodeCMD) == 0 && move($tempfile,$outfile) && system($removeCMD) && print "$outfile\n";
