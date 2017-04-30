@@ -7,13 +7,14 @@
 //
 
 #import <Automator/AMShellScriptAction.h>
+#import <Cocoa/Cocoa.h> 
 
 @interface Handbrake_Encode : AMShellScriptAction {
-	NSTextField *qualityTextField;
+	NSTextField *__weak qualityTextField;
 	double quality;
 }
 
-@property (assign) IBOutlet NSTextField *qualityTextField;
+@property (weak) IBOutlet NSTextField *qualityTextField;
 
 - (IBAction)sliderMove:(id)sender;
 
